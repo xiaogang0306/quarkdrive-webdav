@@ -7,20 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Zig
-        uses: wolfgang42/setup-zig@v1
-        with:
-          zig-version: 0.13.0
-
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-unknown-linux-musl
 
-      - name: Build with cargo-zigbuild
-        run: |
-          cargo install cargo-zigbuild
-          cargo zigbuild --release --target aarch64-unknown-linux-musl
+      - name: Build
+        run: cargo build --release --target aarch64-unknown-linux-musl
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
